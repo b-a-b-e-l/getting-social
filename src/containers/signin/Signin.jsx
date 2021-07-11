@@ -1,4 +1,4 @@
-import LoginForm from './components/LoginForm.jsx';
+import LoginForm from '../login/components/LoginForm.jsx';
 import LoginTemplate from "../../components/LoginTemplate"
 
 

@@ -6,7 +6,7 @@ export default function Login() {
   
     return (
         <LoginTemplate title="Getting Social" subtitle="Nice to see you around here! 
-        Please log in first." leftLink={["Forgot password?" , "#"]} rightLink={["First time here? Sign in", "Signin"]}>
+        Please log in first." leftLink={{ label:"Forgot password?" , to:"#"}} rightLink={{ label:"First time here? Sign in", to:"Signin"}}>
             < LoginForm />
         </LoginTemplate>
     )}
