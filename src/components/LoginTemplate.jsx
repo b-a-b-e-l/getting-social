@@ -1,37 +1,71 @@
-import { Box, Typography, Grid, Link } from '@material-ui/core';
+import { Box, Typography, Grid } from '@material-ui/core';
+import { Link } from "react-router-dom";
 import StyledIcon from './StyledIcon.jsx';
-import ResponsiveBox from "./ResponsiveBox"
-import Name from "../constants/Name"
+import PageContent from "./ResponsiveBox"
+import { Name } from "../constants/name"
 
 
-const LoginTemplate = ({children, subtitle, leftLink, rightLink}) => {
-return <Box alignItems="center" minHeight="100vh" display="flex" 
-flexDirection="column" justifyContent="center">
-  <ResponsiveBox sm={{ maxWidth:"100%" }} md={{ maxWidth:"55%" }}>
-    <Box marginBottom="1em" display="flex" flexDirection="column" justifyContent="center">
-    < StyledIcon fill="#13DF7D"/>
-    < Typography variant="h2" color="primary" > <Name/> </Typography>
-    < Typography variant="body1" > {subtitle} </Typography>
+const LoginTemplate = ({children, subtitle, leftLink = {}, rightLink = {}}) => {
+
+  const getHeader = () => (
+    <Box 
+      marginBottom="1em" 
+      display="flex" 
+      flexDirection="column" 
+      justifyContent="center"
+    >
+      <StyledIcon fill="#13DF7D"/>
+      <Typography variant="h2" color="primary" align='center'> 
+        {Name} 
+      </Typography>
+      <Typography variant="body1" align='center'> 
+        {subtitle} 
+      </Typography>
     </Box>
-      {children}
-    <Grid container direction="row" justify="space-between" alignItems="flex-start" >
-      { !!leftLink.length && leftLink.map(({ label, to }) => 
-      <div>
-                  <Link to={to} variant="body2"> {label} </Link>
-             </div>
-             )
+  )
+
+  return (
+    <Box 
+      width='100%'
+      height='100vh'
+      display='flex'
+      justifyContent='center'
+      alignItems='center'
+    >
+      <PageContent 
+        sm={{ maxWidth:"100%"}} 
+        md={{ maxWidth:"55%" }}
+      >
+
+        {getHeader()}
+        
+        {children}
+
+        <Grid 
+          container 
+          direction="row" 
+          justify="space-between" 
+          alignItems="flex-start"
+        >
+          {
+            
           }
-         {
-             !!rightLink.length ? rightLink.map(({ label, to }) => 
-             <div>
-                  <Link to={to} variant="body2"> {label} </Link>
-             </div>
-             )
-             : null
+          { leftLink.hasOwnProperty('label') &&
+              <div>
+                <Link to={leftLink.to || '#'} variant="body2"> {leftLink.label} </Link>
+              </div>
           }
-    </Grid>
-    </ResponsiveBox>
-</Box>
+          { 
+            !!Object.keys(rightLink).length &&
+              <div>
+                <Link to={rightLink.to} variant="body2"> {rightLink.label} </Link>
+              </div>
+          }
+        </Grid>
+      </PageContent>
+    </Box>
+
+  )
 
 }
 
