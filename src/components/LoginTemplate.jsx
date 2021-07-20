@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import StyledIcon from './StyledIcon.jsx';
 import PageContent from "./ResponsiveBox"
 import { Name } from "../constants/name"
-
+ 
 
 const LoginTemplate = ({children, subtitle, leftLink = {}, rightLink = {}}) => {
 

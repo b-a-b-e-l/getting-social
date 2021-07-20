@@ -1,6 +1,7 @@
 import './App.css';
-import Login from '../login/Login.jsx'
+import Login from '../login/Login'
 import Signin from '../signin/Signin'
+import ForgotPassword from '../forgot-password/ForgotPassword'
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import { PUBLIC } from '../../constants/routes';
 
@@ -11,12 +12,12 @@ function App() {
         <Route path={PUBLIC.LOGIN}>
           <Login/>
         </Route>
-        <Route path="/signin">
+        <Route path={PUBLIC.SIGN_IN}>
           <Signin/>
         </Route>
-        {/* <Route path="/forgot-password">
-            
-        </Route> */}
+        <Route path={PUBLIC.FORGOT_PASSWORD}>
+          <ForgotPassword/>
+        </Route>
       </Switch>
     </Router>
   );
