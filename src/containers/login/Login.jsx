@@ -1,8 +1,34 @@
+import { useState } from 'react';
 import LoginForm from './components/LoginForm.jsx';
 import LoginTemplate from "../../components/LoginTemplate"
 import { PUBLIC } from '../../constants/routes'
+import { USERS_VALUES } from '../../constants/localStorage'
+
+const initialValues = {
+    email:'', 
+    password:''
+};
 
 export default function Login() {
+    const [user, setUser] = useState(initialValues)
+
+    const handleChange = attribute => {
+        return (event) => {
+            setUser({
+                ...user,
+                [attribute]: event.target.value,
+            }) 
+        }
+    }
+  
+    const handleSubmitLogin = event => {
+      event.preventDefault();
+      localStorage.setItem(USERS_VALUES, JSON.stringify([user]));
+    }
+
+    const handleChangeEmail = handleChange('email')
+    const handleChangePassword = handleChange('password')
+
   
     return (
         <LoginTemplate title="Getting Social" subtitle="Nice to see you around here! 
@@ -10,6 +36,12 @@ export default function Login() {
             leftLink={{ label:"Forgot password?", to: PUBLIC.FORGOT_PASSWORD }} 
             rightLink={{ label:"First time here? Sign in", to: PUBLIC.SIGN_IN }}
         >
-            < LoginForm />
+            <LoginForm 
+                onChangeEmail={handleChangeEmail} 
+                onChangePassword={handleChangePassword} 
+                onClickSubmit={handleSubmitLogin}
+                email={user.email}
+                password={user.password}
+            />
         </LoginTemplate>
     )}

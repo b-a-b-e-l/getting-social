@@ -3,6 +3,8 @@ const LOGIN = `${ROOT}/login`;
 const SIGN_IN = `${ROOT}/signin`;
 const FORGOT_PASSWORD = `${ROOT}/forgot-password`;
 
+const DASHBOARD = '/dashboard';
+
 export const PUBLIC = {
     LOGIN,
     SIGN_IN,
@@ -10,6 +12,6 @@ export const PUBLIC = {
 };
 
 export const PRIVATE = {
-
+    DASHBOARD
 };
 
