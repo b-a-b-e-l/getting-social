@@ -1,23 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import LoginForm from './components/LoginForm.jsx';
 import LoginTemplate from "../../components/LoginTemplate"
 import { PUBLIC } from '../../constants/routes'
-import { USERS_VALUES } from '../../constants/localStorage'
+import { USERS_VALUES, AUTHENTICATED_USER } from '../../constants/localStorage'
 import { useHistory } from 'react-router-dom';
 
 export default function Login() {
-    const storedUser = JSON.parse(localStorage.getItem([USERS_VALUES]))
+    const [storedUsers, setStoredUsers] = useState([])
     const [user, setUser] = useState('')
     const history = useHistory()
 
-    // function emailMatches(email) {
-    //     return storedUser.email === email;
-    //   }
-
-    const emailMatches = storedUser.find(function(email) {
-        if(storedUser.email == email)
-            return true;
-    })
+    useEffect(() => {
+      setStoredUsers(JSON.parse(localStorage.getItem([USERS_VALUES])));
+    }, [])
 
     const handleChange = attribute => {
         return (event) => {
@@ -27,13 +22,17 @@ export default function Login() {
             }) 
         }
     }
-    console.log(user.email)
-    console.log(user.password)
 
     const handleSubmitLogin = event => {
       event.preventDefault();
-      if (emailMatches && user.password == storedUser[0].password) {
+      
+      const matchedUser = storedUsers.find(({ email, password }) => (
+          email == user.email && password == user.password
+      ))
+
+      if (matchedUser) {
           history.push("/dashboard")
+          localStorage.setItem(AUTHENTICATED_USER, JSON.stringify(matchedUser))
       } else {
           alert("email and password don't match")
       }
