@@ -3,14 +3,21 @@ import LoginForm from './components/LoginForm.jsx';
 import LoginTemplate from "../../components/LoginTemplate"
 import { PUBLIC } from '../../constants/routes'
 import { USERS_VALUES } from '../../constants/localStorage'
-
-const initialValues = {
-    email:'', 
-    password:''
-};
+import { useHistory } from 'react-router-dom';
 
 export default function Login() {
-    const [user, setUser] = useState(initialValues)
+    const storedUser = JSON.parse(localStorage.getItem([USERS_VALUES]))
+    const [user, setUser] = useState('')
+    const history = useHistory()
+
+    // function emailMatches(email) {
+    //     return storedUser.email === email;
+    //   }
+
+    const emailMatches = storedUser.find(function(email) {
+        if(storedUser.email == email)
+            return true;
+    })
 
     const handleChange = attribute => {
         return (event) => {
@@ -20,10 +27,16 @@ export default function Login() {
             }) 
         }
     }
-  
+    console.log(user.email)
+    console.log(user.password)
+
     const handleSubmitLogin = event => {
       event.preventDefault();
-      localStorage.setItem(USERS_VALUES, JSON.stringify([user]));
+      if (emailMatches && user.password == storedUser[0].password) {
+          history.push("/dashboard")
+      } else {
+          alert("email and password don't match")
+      }
     }
 
     const handleChangeEmail = handleChange('email')

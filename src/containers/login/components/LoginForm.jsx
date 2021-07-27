@@ -1,11 +1,12 @@
 import { TextField, Button, FormControlLabel, Checkbox } from '@material-ui/core';
 import ButtonCentered from '../../../components/ButtonCentered';
 
+
 const LoginForm = (props) => {
   
   const { 
     onChangeEmail, 
-    onChangePassword,
+    onChangePassword, 
     onClickSubmit,
     email,
     password,
