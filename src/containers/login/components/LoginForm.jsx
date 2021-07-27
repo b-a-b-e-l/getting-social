@@ -1,17 +1,60 @@
 import { TextField, Button, FormControlLabel, Checkbox } from '@material-ui/core';
+import ButtonCentered from '../../../components/ButtonCentered';
 
 
+const LoginForm = (props) => {
+  
+  const { 
+    onChangeEmail, 
+    onChangePassword, 
+    onClickSubmit,
+    email,
+    password,
+  } = props
 
-export default function LoginForm (){
   return (
-  <form  autoComplete="off">
-        <TextField id="outlined-basic" label="email" variant="outlined" placeholder="email@domain.com" fullWidth style={{ marginBottom: "1em" }} />
-        <TextField id="outlined-basic" label="password" variant="outlined" placeholder="*******" fullWidth style={{ marginBottom: "1em" }}/>
+  <form 
+    autoComplete="off"
+  >
+        <TextField 
+        name="email"
+        value={email}
+        label="email" 
+        type="email" 
+        variant="outlined" 
+        placeholder="email@domain.com" 
+        onChange={onChangeEmail}
+        fullWidth 
+        style={{ 
+          marginBottom: "1em" 
+        }}/>
+        <TextField 
+        name="password" 
+        label="password" 
+        type="password"
+        value={password}
+        variant="outlined" 
+        placeholder="*******"
+        onChange={onChangePassword}
+        fullWidth 
+        style={{ 
+          marginBottom: "1em" 
+          }}/>
         <FormControlLabel
             control={<Checkbox color="primary" />}
             label="Stay logged in"
           />
-        <Button variant="contained" color="primary"> Log in </Button>
+        <ButtonCentered>
+          <Button 
+            variant="contained" 
+            color="primary"
+            onClick={onClickSubmit}
+          > 
+          Submit 
+          </Button>
+        </ButtonCentered>
     </form>
   )
 }
+
+export default LoginForm;
