@@ -9,7 +9,10 @@ import { Name } from "../../constants/name"
 const Dashboard = () => {
     const history = useHistory()
 
-    if (localStorage.getItem(AUTHENTICATED_USER).length) {
+    if(!localStorage.getItem(AUTHENTICATED_USER).length) {
+        history.push(PUBLIC.LOGIN)
+    } 
+    
     return (
         <div>
         <AppBar position="static">
@@ -24,12 +27,6 @@ const Dashboard = () => {
         </AppBar>
       </div>
     )
-} else {
-    history.push(PUBLIC.LOGIN)
-    return (
-        null
-    )
-}
 }
 
 export default Dashboard;
