@@ -8,8 +8,8 @@ import { Name } from "../../constants/name"
 
 const Dashboard = () => {
     const history = useHistory()
-    
-    if (AUTHENTICATED_USER.length) {
+
+    if (localStorage.getItem(AUTHENTICATED_USER).length) {
     return (
         <div>
         <AppBar position="static">
