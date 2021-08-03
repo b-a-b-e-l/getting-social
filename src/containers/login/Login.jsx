@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import LoginForm from './components/LoginForm.jsx';
 import LoginTemplate from "../../components/LoginTemplate"
-import { PUBLIC } from '../../constants/routes'
+import { PUBLIC, PRIVATE } from '../../constants/routes'
 import { USERS_VALUES, AUTHENTICATED_USER } from '../../constants/localStorage'
 import { useHistory } from 'react-router-dom';
 
@@ -31,7 +31,7 @@ export default function Login() {
       ))
 
       if (matchedUser) {
-          history.push("/dashboard")
+          history.push(PRIVATE.DASHBOARD)
           localStorage.setItem(AUTHENTICATED_USER, JSON.stringify(matchedUser))
       } else {
           alert("email and password don't match")
