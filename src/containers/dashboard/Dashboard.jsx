@@ -11,7 +11,7 @@ import PostCard from '../../components/PostCard';
 const Dashboard = () => {
     const history = useHistory()
     const [posts, setPosts] = useState([])
-    // const [comments, setComments] = useState([])
+    const [comments, setComments] = useState([])
 
     useEffect(() => {
       getPosts().then( response => {
@@ -21,13 +21,12 @@ const Dashboard = () => {
       })
     }, [])
 
-    // useEffect(() => {
-    //   getComments("60d0fe4f5311236168a10a2c").then( response => {
-    //       setComments(response.data.data.message)
-    //   })
-    // }, [])
-
-    // console.log(comments)
+    const fetchComments = (postId) => {
+      getComments(postId).then( response => {
+        setComments(response.data.data.message)
+        console.log(comments)
+    })
+    }
 
 
     if(!localStorage.getItem(AUTHENTICATED_USER).length) {
@@ -49,21 +48,24 @@ const Dashboard = () => {
         <Grid
          container
          direction="row"
-         justifyContent="space-between"
+         justify="space-between"
          alignItems="flex-start"
         >
         {
         !!posts.length && posts.map(post => (
+          <Grid item>
           <PostCard 
-          Username={post.owner.firstName} 
-          LastName={post.owner.lastName}
-          Photo={post.image}
-          Description={post.text}
-          Likes={post.likes}
-          AvatarPic={post.owner.picture}
-          CreateDate={post.publishDate}
-          Tags={[post.tags]}
+          username={post.owner.firstName} 
+          lastName={post.owner.lastName}
+          photo={post.image}
+          description={post.text}
+          likes={post.likes}
+          avatarPic={post.owner.picture}
+          createDate={post.publishDate}
+          tags={post.tags}
+          onClickComments={() => fetchComments(post.id)}
           />
+          </Grid>
         ) )
         }
         </Grid>

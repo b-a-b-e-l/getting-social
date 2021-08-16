@@ -7,5 +7,5 @@ export const getPosts = () => {
 }  
 
 export const getComments = (postID) => {
-    return axios.get(`${apiEndpoint}/${postID}/comment`, {params: {limit: 20}, headers: {"app-id": "61096989f29d2b6c8da431f6"}})
+    return axios.get(`${apiEndpoint}/post/${postID}/comment`, {params: {limit: 20}, headers: {"app-id": "61096989f29d2b6c8da431f6"}})
 }

@@ -15,17 +15,18 @@ padding: 8px;
 
 const PostCard = (props) => {
     const { 
-        Username, 
-        LastName,
-        Photo, 
-        Description,
-        Likes,
-        AvatarPic,
-        CreateDate,
-        Tags,
+        username, 
+        lastName,
+        photo, 
+        description,
+        likes,
+        avatarPic,
+        createDate,
+        tags,
+        onClickComments,
       } = props
 
-    const fullName= `${Username} ${LastName}` 
+    const fullName= `${username} ${lastName}` 
     const [expanded, setExpanded] = useState(false);
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -36,38 +37,41 @@ const PostCard = (props) => {
       <CardContainer variant="outlined">
         <CardHeader
         avatar={
-          <Avatar src={AvatarPic} alt={Username}/>
+          <Avatar src={avatarPic} alt={fullName}/>
         }
         title={fullName}
-        subheader={new Date().toLocaleDateString("en-GB", {CreateDate})}
+        subheader={new Date().toLocaleDateString("en-GB", {createDate})}
         />
        <CardContent>
        <Typography variant="body1" color="textSecondary" component="p">
-        {Description}
+        {description}
        </Typography>
        </CardContent>
         <CardActionArea>
           <CardMedia
             component="img"
-            alt={Description}
+            alt={description}
             height="250px"
-            image={Photo}
-            title={Description}
+            image={photo}
+            title={description}
           />
         </CardActionArea>
         <CardActions>
             <FavoriteIcon/>
             <Typography variant="body2" color="textSecondary" component="p">
-              {Likes} like this post
+              {likes} like this post
             </Typography>
           <Button size="medium" color="primary" onClick={handleExpandClick}>
             # Tags
+          </Button>
+          <Button size="medium" color="primary" onClick={onClickComments}>
+            COMMENTS
           </Button>
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
         {
-        !!Tags.length && Tags.map(tag => (
+        !!tags.length && tags.map(tag => (
           <ul>
             <li>{tag}</li>
           </ul>
