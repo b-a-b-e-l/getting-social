@@ -1,17 +1,36 @@
 import {useState} from 'react';
-import { Card, CardActionArea, CardHeader, CardActions, CardContent, CardMedia, Avatar, Button, Typography, Collapse } from '@material-ui/core';
+import { Card, CardHeader, CardActions, CardContent, Avatar, Button, Typography, Collapse } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components'
 
+const growCard = keyframes`
+  to {
+    width:90vw;
+    height:90vh;
+  }
+`;
+
+const growImage = keyframes`
+  to {
+    width:100%;
+    height:50%;
+  }
+`;
 
 const CardContainer = styled(Card)`
+position: relative;
 border-radius: 23px;
 margin: 4px;
 padding: 8px;
+animation: ${props => props.animate ? css`${growCard} 0.3s linear forwards` : `null`};
 `
-// const PostPhoto = styled(CardMedia)`
-// object-fit: cover;
-// `
+const StyledCardMedia = styled.div`
+width: 100%;
+height: 250px;
+background: url("${props => props.image}") no-repeat center center;
+background-size: cover;
+animation: ${props => props.animate ? css`${growImage} 0.3s linear forwards` : `null`};
+`
 
 const PostCard = (props) => {
     const { 
@@ -24,6 +43,8 @@ const PostCard = (props) => {
         createDate,
         tags,
         onClickComments,
+        comments,
+        fullGrow,
       } = props
 
     const fullName= `${username} ${lastName}` 
@@ -31,10 +52,14 @@ const PostCard = (props) => {
     const handleExpandClick = () => {
         setExpanded(!expanded);
       };
+   
+    const handleFullPostClick = () => {
+      onClickComments()
+    }
 
 
     return (
-      <CardContainer variant="outlined">
+      <CardContainer variant="outlined" animate={fullGrow}>
         <CardHeader
         avatar={
           <Avatar src={avatarPic} alt={fullName}/>
@@ -47,15 +72,11 @@ const PostCard = (props) => {
         {description}
        </Typography>
        </CardContent>
-        <CardActionArea>
-          <CardMedia
-            component="img"
+          <StyledCardMedia
             alt={description}
-            height="250px"
             image={photo}
-            title={description}
+            animate={fullGrow}
           />
-        </CardActionArea>
         <CardActions>
             <FavoriteIcon/>
             <Typography variant="body2" color="textSecondary" component="p">
@@ -64,8 +85,8 @@ const PostCard = (props) => {
           <Button size="medium" color="primary" onClick={handleExpandClick}>
             # Tags
           </Button>
-          <Button size="medium" color="primary" onClick={onClickComments}>
-            COMMENTS
+          <Button size="medium" color="primary" onClick={handleFullPostClick}>
+            Comments
           </Button>
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
@@ -79,6 +100,15 @@ const PostCard = (props) => {
         }
         </CardContent>
       </Collapse>
+      <CardContent>
+      {
+        !!comments.length && comments.map(comment => (
+          <ul>
+            <li>{comment.message}</li>
+          </ul>
+        ))
+        }  
+      </CardContent>
       </CardContainer>
     );
   }

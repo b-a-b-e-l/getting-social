@@ -8,10 +8,13 @@ import { getPosts, getComments } from "../../core/api";
 import { useEffect, useState } from "react";
 import PostCard from '../../components/PostCard';
 
+
+
 const Dashboard = () => {
     const history = useHistory()
     const [posts, setPosts] = useState([])
     const [comments, setComments] = useState([])
+    const [selectedPost, setSelectedPost] = useState()
 
     useEffect(() => {
       getPosts().then( response => {
@@ -21,11 +24,17 @@ const Dashboard = () => {
       })
     }, [])
 
-    const fetchComments = (postId) => {
+    const handleGetComments = (postId) => {
+      setSelectedPost(postId)
       getComments(postId).then( response => {
-        setComments(response.data.data.message)
+        setComments(response.data.data)
         console.log(comments)
     })
+    }
+
+    const resetComments= () => {
+      setSelectedPost()
+      setComments([])
     }
 
 
@@ -63,7 +72,9 @@ const Dashboard = () => {
           avatarPic={post.owner.picture}
           createDate={post.publishDate}
           tags={post.tags}
-          onClickComments={() => fetchComments(post.id)}
+          onClickComments={() => selectedPost === post.id ? resetComments() : handleGetComments(post.id)}
+          comments= {selectedPost === post.id ? comments : []}
+          fullGrow= {selectedPost === post.id}
           />
           </Grid>
         ) )
