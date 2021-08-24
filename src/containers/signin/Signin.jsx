@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import LoginForm from '../login/components/LoginForm.jsx';
 import LoginTemplate from "../../components/LoginTemplate";

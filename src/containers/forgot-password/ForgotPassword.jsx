@@ -1,3 +1,4 @@
+import React from 'react';
 import LoginTemplate from '../../components/LoginTemplate';
 import ButtonCentered from '../../components/ButtonCentered';
 import ResponsiveBox from '../../components/ResponsiveBox'

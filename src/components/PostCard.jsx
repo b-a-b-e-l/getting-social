@@ -1,3 +1,4 @@
+import React from 'react';
 import {useState} from 'react';
 import { Card, CardHeader, CardActions, CardContent, Avatar, Button, Typography, Collapse } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';

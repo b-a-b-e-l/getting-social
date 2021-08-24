@@ -1,3 +1,4 @@
+import React from 'react';
 import { AUTHENTICATED_USER } from '../../constants/localStorage';
 import { PUBLIC } from '../../constants/routes';
 import { useHistory } from 'react-router-dom';

@@ -1,3 +1,4 @@
+import React from 'react';
 import { ReactComponent as Iconsocial } from '../images/iconsocial.svg'
 import styled from 'styled-components';
 
