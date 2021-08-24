@@ -1,26 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './containers/app/App'
-import reportWebVitals from './reportWebVitals';
-import { ThemeProvider, createMuiTheme, } from '@material-ui/core/styles';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import App from "./containers/app/App";
+import reportWebVitals from "./reportWebVitals";
 
-const theme = createMuiTheme ({
+const theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#13DF7D"
-  }
-}
-})
-
+      main: "#13DF7D",
+    },
+  },
+});
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme} >
-       <App />
+    <ThemeProvider theme={theme}>
+      <App />
     </ThemeProvider>
   </React.StrictMode>,
-document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -1,26 +1,26 @@
-import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import './App.css';
-import Login from '../login/Login'
-import Signin from '../signin/Signin'
-import ForgotPassword from '../forgot-password/ForgotPassword'
-import Dashboard from '../dashboard/Dashboard';
-import { PUBLIC, PRIVATE } from '../../constants/routes';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "./App.css";
+import Login from "../login/Login";
+import Signin from "../signin/Signin";
+import ForgotPassword from "../forgot-password/ForgotPassword";
+import Dashboard from "../dashboard/Dashboard";
+import { PUBLIC, PRIVATE } from "../../constants/routes";
 
 function App() {
   return (
     <Router>
       <Switch>
         <Route path={PUBLIC.LOGIN}>
-          <Login/>
+          <Login />
         </Route>
         <Route path={PUBLIC.SIGN_IN}>
-          <Signin/>
+          <Signin />
         </Route>
         <Route path={PUBLIC.FORGOT_PASSWORD}>
-          <ForgotPassword/>
+          <ForgotPassword />
         </Route>
         <Route path={PRIVATE.DASHBOARD}>
-          <Dashboard/>
+          <Dashboard />
         </Route>
       </Switch>
     </Router>
