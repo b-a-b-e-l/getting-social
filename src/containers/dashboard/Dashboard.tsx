@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { AUTHENTICATED_USER } from "../../constants/localStorage";
 import { PUBLIC } from "../../constants/routes";
 import { useHistory } from "react-router-dom";
@@ -15,25 +15,26 @@ import BarHomeIcon from "../../components/BarHomeIcon";
 import { Name } from "../../constants/name";
 import { getPosts, getComments } from "../../core/api";
 import { useEffect, useState } from "react";
+import { Post, Comment } from '../../core/types';
 import PostCard from "../../components/PostCard";
 
-const Dashboard = () => {
+const Dashboard: FunctionComponent = () => {
   const history = useHistory();
-  const [posts, setPosts] = useState([]);
-  const [comments, setComments] = useState([]);
-  const [selectedPost, setSelectedPost] = useState();
-  const [loading, setLoading] = useState(false);
+  const [posts, setPosts] = useState<Array<Post>>([]);
+  const [comments, setComments] = useState<Array<Comment>>([]);
+  const [selectedPost, setSelectedPost] = useState<String>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     getPosts().then((response) => {
       if (response.data.data.length) {
-        setPosts(response.data.data.filter((post) => post.image));
+        setPosts(response.data.data.filter((post: Post) => post.image));
         setLoading(true);
       }
     });
   }, []);
 
-  const handleGetComments = (postId) => {
+  const handleGetComments = (postId: string) => {
     setSelectedPost(postId);
     getComments(postId).then((response) => {
       setComments(response.data.data);
@@ -42,7 +43,7 @@ const Dashboard = () => {
   };
 
   const resetComments = () => {
-    setSelectedPost();
+    setSelectedPost(null);
     setComments([]);
   };
 
@@ -56,7 +57,7 @@ const Dashboard = () => {
         <div>
           <AppBar position="static">
             <Toolbar>
-              <IconButton edge="start" color="#FFF" aria-label="menu">
+              <IconButton edge="start" color="primary" aria-label="menu">
                 <BarHomeIcon />
               </IconButton>
               <Typography variant="h6" color="secondary">

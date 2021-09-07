@@ -8,7 +8,7 @@ export const getPosts = () =>
     headers: { "app-id": "611a380f6e75df584081c2ec" },
   });
 
-export const getComments = (postID) =>
+export const getComments = (postID: string) =>
   axios.get(`${apiEndpoint}/post/${postID}/comment`, {
     params: { limit: 20 },
     headers: { "app-id": "611a380f6e75df584081c2ec" },
