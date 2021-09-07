@@ -1,1 +1,3 @@
-export const Name = "Getting Social"
+export const Name = "Getting Social";
+
+export default Name;
