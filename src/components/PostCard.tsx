@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { useState } from "react";
 import {
   Card,
@@ -12,6 +12,20 @@ import {
 } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import styled, { css, keyframes } from "styled-components";
+
+interface SuperProps {
+  username: any;
+  lastName: any;
+  photo: any;
+  description: any;
+  likes: any;
+  avatarPic: any;
+  createDate: any;
+  tags: any;
+  onClickComments: any;
+  comments: any;
+  fullGrow: any;
+}
 
 const growCard = keyframes`
   to {
@@ -71,7 +85,7 @@ const CommentOwner = styled.span`
   color: #2794eb;
 `;
 
-const PostCard = (props) => {
+const PostCard: FunctionComponent<SuperProps> = (props: SuperProps) => {
   const {
     username,
     lastName,
